@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { tempoParaSegundos } from "../../common/utils/time";
 import { Itarefa } from "../../types/task";
 import Button from "../Button";
@@ -13,9 +13,11 @@ export default function StopWatch({ selecionado }: Props) {
 
     const [tempo, setTempo] = useState<number>();
 
-    if (selecionado?.tempo) {
-        setTempo(tempoParaSegundos(selecionado.tempo));
-    }
+    useEffect(() => {
+        if (selecionado?.tempo) {
+            setTempo(tempoParaSegundos(selecionado.tempo))
+        }
+    }, [selecionado])
 
     return (
         <div className={style.stopwatch}>
